@@ -37,7 +37,23 @@ The **Keycloak Bundle for Symfony** (`Zepekegno\KeycloakBundle`) is a complete K
 - Multi-platform applications (web, mobile, desktop)
 - Systems requiring centralized user management
 
-## Bundle Architecture
+## Requirements
+
+- PHP: >= 8.0 (bundle minimum); examples in this repository run with PHP >= 8.2 (Symfony 7.3.*)
+- Symfony components (required by the bundle):
+  - symfony/framework-bundle: ^6.0
+  - symfony/security-bundle: ^6.0
+  - symfony/http-client: ^6.0
+- JWT library:
+  - firebase/php-jwt: ^6.0
+- Notes:
+  - Typical Symfony apps also have ext-ctype and ext-iconv enabled.
+  - The sample applications in this repository use Symfony 7.3.* and PHP 8.2.
+
+Minimal install in a Symfony project:
+```bash
+composer require symfony/framework-bundle symfony/security-bundle symfony/http-client firebase/php-jwt
+```
 
 ### File Structure
 
@@ -119,6 +135,7 @@ keycloak:
     admin_client_secret: '%env(KEYCLOAK_ADMIN_CLIENT_SECRET)%' # Admin Client Secret for Admin API
     public_key: '%env(KEYCLOAK_PUBLIC_KEY)%'          # Realm public key for JWT verification
     scope: null 
+    algoritm: RS256				      # JWT signing algorithm
   
     # Paramètres optionnels
     verify_token: true                                # Enable JWT signature verification (default: true)
@@ -932,12 +949,10 @@ For questions or issues:
 - Documentation: [Wiki](https://github.com/zepekegno224/keycloakBundle/wiki)
 - Discussions: [GitHub Discussions](https://github.com/zepekegno224/keycloakBundle/discussions)
 
-### Related Projects
+## Full Setup Guide
 
-- [Keycloak](https://www.keycloak.org/) - Open Source Identity and Access Management
-- [Symfony Security](https://symfony.com/doc/current/security.html) - Symfony Security Component
-- [Firebase JWT](https://github.com/firebase/php-jwt) - PHP JWT Library
+For a step-by-step integration with Symfony (installation, configuration, security, routes, examples), see docs/SETUP.md.
 
----
+## Wiki
 
-**This documentation covers all features of the Keycloak Bundle for Symfony. For specific questions or particular use cases, feel free to consult the source code or create issues on the project repository.**
+For detailed usage guides, security setup (Web and API), services documentation, and troubleshooting, see docs/wiki/Home.md.
