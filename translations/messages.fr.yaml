@@ -1,0 +1,31 @@
+# Traductions françaises pour le KeycloakBundle
+
+keycloak:
+  login:
+    title: "Connexion avec Keycloak"
+    button: "Se connecter"
+  logout:
+    title: "Déconnexion"
+    button: "Se déconnecter"
+  register:
+    title: "Inscription"
+    success: "Inscription réussie. Veuillez vérifier votre email pour activer votre compte."
+    error: "Erreur lors de l'inscription. Veuillez réessayer."
+  profile:
+    title: "Profil utilisateur"
+  error:
+    invalid_token: "Token invalide ou expiré"
+    missing_code: "Code d'autorisation manquant"
+    invalid_state: "État de sécurité invalide"
+  jwt:
+    missing_token: "Token JWT manquant"
+    invalid: "Token JWT invalide"
+    expired: "Token JWT expiré"
+    invalid_missing_user: "Token JWT invalide: identifiant utilisateur manquant"
+  auth:
+    missing_params: "Paramètres manquants dans la réponse Keycloak."
+    invalid_state: "État CSRF invalide."
+    missing_code_verifier: "Code verifier manquant dans la session."
+    invalid_token: "Token invalide."
+    keycloak_error: "Erreur Keycloak: %error% - %description%"
+    code_exchange_error: "Erreur lors de l'échange du code: %message%"

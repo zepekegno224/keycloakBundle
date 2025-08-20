@@ -1,0 +1,23 @@
+# ROUTE_CALLBACK = 'keycloak_callback'
+keycloak_callback:
+    path: /callback
+    controller: Zepekegno\KeycloakBundle\Controller\AuthController::callback
+    methods: [GET]
+
+# ROUTE_PROFILE = 'keycloak_profile'
+keycloak_profile:
+    path: /profile
+    controller: Zepekegno\KeycloakBundle\Controller\AuthController::profile
+    methods: [GET]
+
+# ROUTE_LOGOUT = 'keycloak_logout'
+keycloak_logout:
+    path: /logout
+    controller: Zepekegno\KeycloakBundle\Controller\AuthController::logout
+    methods: [GET, POST]
+
+# ROUTE_LOGIN = 'keycloak_login'
+keycloak_login:
+    path: /login
+    controller: Zepekegno\KeycloakBundle\Controller\AuthController::login
+    methods: [GET]
