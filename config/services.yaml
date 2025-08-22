@@ -1,0 +1,99 @@
+services:
+    # Configuration par défaut pour les services dans ce bundle
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $keycloakBaseUrl: '%keycloak.base_url%'
+            $keycloakRealm: '%keycloak.realm%'
+            $keycloakClientId: '%keycloak.client_id%'
+            $keycloakClientSecret: '%keycloak.client_secret%'
+            $keycloakAdminClientId: '%keycloak.admin_client_id%'
+            $keycloakAdminClientSecret: '%keycloak.admin_client_secret%'
+            $keycloakPublicKey: '%keycloak.public_key%'
+            $keycloakVerifyToken: '%keycloak.verify_token%'
+            $keycloakAlgorithm: '%keycloak.algorithm%'
+            $keycloakUserProviderService: '%keycloak.user_provider_service%'
+            $keycloakScope: '%keycloak.scope%'
+
+    # Services du bundle
+    Zepekegno\KeycloakBundle\Service\KeycloakAdminService:
+        public: true
+
+    Zepekegno\KeycloakBundle\Service\OIDCService:
+        public: true
+
+    Zepekegno\KeycloakBundle\Controller\AuthController:
+        public: true
+        tags: ['controller.service_arguments']
+
+    Zepekegno\KeycloakBundle\Security\KeycloakJwtAuthenticator:
+        public: true
+
+    Zepekegno\KeycloakBundle\Security\KeycloakJwtAuthenticatorEntrypoint:
+        public: true
+
+    Zepekegno\KeycloakBundle\Security\KeycloakAuthenticatorEntrypoint:
+        public: true
+
+    Zepekegno\KeycloakBundle\Security\KeycloakAuthenticator:
+        public: true
+        arguments:
+            $oidcService: '@keycloak.oidc_service'
+            $urlGenerator: '@router'
+            $callbackRoute: '%keycloak.route.callback%'
+
+    Zepekegno\KeycloakBundle\Security\KeycloakUserProvider:
+        public: true
+
+    # Service de gestion des refresh tokens
+    Zepekegno\KeycloakBundle\Service\TokenRefreshService:
+        public: true
+
+    # Listener pour la vérification de l'expiration des tokens
+    Zepekegno\KeycloakBundle\EventListener\TokenExpirationListener:
+        arguments:
+            $tokenRefreshService: '@Zepekegno\KeycloakBundle\Service\TokenRefreshService'
+            $urlGenerator: '@router'
+        tags:
+            - { name: kernel.event_subscriber }
+    Zepekegno\KeycloakBundle\EventListener\AuthenticationSuccessListener:
+        arguments:
+            - '@router'
+            - '%keycloak.redirect_routes%'
+        tags:
+            - { name: kernel.event_subscriber }
+    # Alias pour le service de refresh des tokens
+    keycloak.token_refresh_service:
+        alias: Zepekegno\KeycloakBundle\Service\TokenRefreshService
+        public: true
+
+    # Alias pour les services
+    keycloak.admin_service:
+        alias: Zepekegno\KeycloakBundle\Service\KeycloakAdminService
+        public: true
+
+    keycloak.oidc_service:
+        alias: Zepekegno\KeycloakBundle\Service\OIDCService
+        public: true
+
+    keycloak.jwt_authenticator:
+        alias: Zepekegno\KeycloakBundle\Security\KeycloakJwtAuthenticator
+        public: true
+
+    keycloak.jwt_authenticator_entrypoint:
+        alias: Zepekegno\KeycloakBundle\Security\KeycloakJwtAuthenticatorEntrypoint
+        public: true
+
+    keycloak.authenticator_entrypoint:
+        alias: Zepekegno\KeycloakBundle\Security\KeycloakAuthenticatorEntrypoint
+        public: true
+
+    keycloak.authenticator:
+        alias: Zepekegno\KeycloakBundle\Security\KeycloakAuthenticator
+        public: true
+
+    keycloak.user_provider:
+        alias: Zepekegno\KeycloakBundle\Security\KeycloakUserProvider
+        public: true

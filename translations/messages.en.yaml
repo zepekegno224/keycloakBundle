@@ -1,0 +1,40 @@
+# English translations for KeycloakBundle
+
+keycloak:
+  login:
+    title: "Login with Keycloak"
+    button: "Login"
+    success: "Login successful"
+    error: "Login error"
+    invalid_state: "Invalid state, please try again"
+  logout:
+    title: "Logout"
+    button: "Logout"
+    success: "Logout successful"
+  register:
+    title: "Registration"
+    success: "Registration successful. Please check your email to activate your account."
+    error: "Registration error. Please try again."
+  profile:
+    title: "User Profile"
+  token:
+    expired: "Your session has expired, please login again"
+    invalid: "Invalid token"
+  error:
+    invalid_token: "Invalid or expired token"
+    missing_code: "Missing authorization code"
+    invalid_state: "Invalid security state"
+    unauthorized: "Unauthorized"
+    forbidden: "Access forbidden"
+  jwt:
+    missing_token: "Missing JWT token"
+    invalid: "Invalid JWT token"
+    expired: "Expired JWT token"
+    invalid_missing_user: "Invalid JWT token: missing user identifier"
+  auth:
+    missing_params: "Missing parameters in Keycloak response."
+    invalid_state: "Invalid CSRF state."
+    missing_code_verifier: "Code verifier missing from session."
+    invalid_token: "Invalid token."
+    keycloak_error: "Keycloak error: %error% - %description%"
+    code_exchange_error: "Error during code exchange: %message%"
